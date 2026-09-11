@@ -56,7 +56,7 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Movie == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -82,7 +82,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -147,7 +147,8 @@ namespace MvcMovie.Controllers
         // GET: Movies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Movie == null)
+
+            if (id == null)
             {
                 return NotFound();
             }
@@ -167,10 +168,6 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Movie == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
-            }
             var movie = await _context.Movie.FindAsync(id);
             if (movie != null)
             {
