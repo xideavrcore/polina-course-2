@@ -1,10 +1,10 @@
 # SQL Server в Docker для Mac (вне папок лабораторных)
 
-Эта папка **не является частью** лабораторных работ `3/` и `4/`.  
-Она нужна только для локального запуска MvcMovie на macOS, где нет SQL Server LocalDB.
+Эта папка **не является частью** лабораторных работ.  
+Нужна для локального запуска на macOS, где нет SQL Server LocalDB.
 
-Код лабораторной работы 4 остаётся как в методике: `UseSqlServer` + строка из `appsettings.json`.  
-На Mac строку подключения к Docker SQL Server задаём **через переменную окружения**, не меняя `appsettings.json` в `4/`.
+Строки подключения в `appsettings.json` лабораторных **не меняем** под Docker.  
+На Mac переопределяем через переменные окружения ASP.NET Core (`ConnectionStrings__...`).
 
 ## Требования
 
@@ -26,22 +26,29 @@ docker compose ps
 
 Пароль SA (как в `docker-compose.yml`): `Your_strong_Passw0rd`
 
-## Запуск лабораторной работы 4 с переопределением строки подключения
-
-Строка в `4/MvcMovie/appsettings.json` остаётся методической. Для Mac переопределите её переменной окружения `ConnectionStrings__MvcMovieContext` (два подчёркивания — стандарт ASP.NET Core Configuration):
+## Лаба 4–6 (MvcMovie)
 
 ```bash
 export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$HOME/.dotnet:$PATH
+export PATH=$HOME/.dotnet:$HOME/.dotnet/tools:$PATH
 
-cd "../4/MvcMovie"
+cd "../4/MvcMovie"   # или 5/MvcMovie, 6/MvcMovie
 
 ConnectionStrings__MvcMovieContext="Server=localhost,1433;Database=MvcMovie;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True" dotnet run
 ```
 
-При старте приложение применит миграции (`Database.Migrate()`) и заполнит таблицу через `SeedData`.
+## Лаба 7 (ContosoUniversity)
 
-Откройте в браузере: `https://localhost:7xxx/Movies` (порт смотрите в выводе `dotnet run` / `launchSettings.json`).
+```bash
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$HOME/.dotnet:$HOME/.dotnet/tools:$PATH
+
+cd "../7/ContosoUniversity"
+
+ConnectionStrings__SchoolContext="Server=localhost,1433;Database=CU-1;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True" dotnet run
+```
+
+При старте: `Database.Migrate()` + `DbInitializer.Initialize`.
 
 ## Остановка
 
