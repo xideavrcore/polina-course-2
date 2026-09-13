@@ -37,7 +37,7 @@ cd "../4/MvcMovie"   # или 5/MvcMovie, 6/MvcMovie
 ConnectionStrings__MvcMovieContext="Server=localhost,1433;Database=MvcMovie;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True" dotnet run
 ```
 
-## Лаба 7 (ContosoUniversity)
+## Лаба 7 (ContosoUniversity Razor Pages)
 
 ```bash
 export DOTNET_ROOT=$HOME/.dotnet
@@ -49,6 +49,20 @@ ConnectionStrings__SchoolContext="Server=localhost,1433;Database=CU-1;User Id=sa
 ```
 
 При старте: `Database.Migrate()` + `DbInitializer.Initialize`.
+
+## Лаба 8 (ContosoUniversity MVC)
+
+```bash
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$HOME/.dotnet:$HOME/.dotnet/tools:$PATH
+
+cd "../8/ContosoUniversity"
+
+ConnectionStrings__SchoolContext="Server=localhost,1433;Database=ContosoUniversity;User Id=sa;Password=Your_strong_Passw0rd;TrustServerCertificate=True" dotnet run
+```
+
+Имя БД — `ContosoUniversity` (как в `appsettings.json` туториала MVC).  
+При старте: `Database.Migrate()` + `DbInitializer.Initialize` (`SchoolContext`).
 
 ## Остановка
 
